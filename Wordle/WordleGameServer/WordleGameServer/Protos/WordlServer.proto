@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "WordleGameServer.Protos";
+
+service WordlServer{
+	rpc Play(stream GuessRequest) returns (stream GuessResponse);
+}
+
+message GuessRequest {
+	string word = 1;
+}
+
+message GuessResponse {
+	bool correct = 1;
+	bool gameOver = 2;
+	string result = 3;
+	string included = 4;
+	string excluded = 5;
+	string unused = 6;
+}
