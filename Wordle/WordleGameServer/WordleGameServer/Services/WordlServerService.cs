@@ -2,6 +2,8 @@
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime;
+using System.Text;
 using WordleGameServer.Protos;
 using WordServer.Protos;
 
@@ -9,6 +11,30 @@ namespace WordleGameServer.Services
 {
     public class WordlServerService : WordlServer.WordlServerBase
     {
+        private static Mutex mut = new Mutex();
+        public override Task<StatResponse> GetStats(Protos.Empty request, ServerCallContext context)
+        {
+            int[] stats = ParseCSV(GetCurrentWord() + ".csv");
+            int pass = 0;
+            for (int i = 1; i < stats.Length; i++)
+            {
+                pass += stats[i];
+            }
+            //should prevent divide by zero
+            float divisor = stats[0] == 0 ? 1.0f : (float)stats[0];
+            StatResponse response = new StatResponse()
+            {
+                Players = (uint)stats[0],
+                Winners = (float)pass / divisor,//correct players divided by all players
+                One = (uint)stats[1],
+                Two = (uint)stats[2],
+                Three = (uint)stats[3],
+                Four = (uint)stats[4],
+                Five = (uint)stats[5],
+                Six = (uint)stats[6],
+            };
+            return Task.FromResult(response);
+        }
         public override async Task Play(IAsyncStreamReader<GuessRequest> requestStream, IServerStreamWriter<GuessResponse> responseStream, ServerCallContext context)
         {
             // Session counters
@@ -18,7 +44,7 @@ namespace WordleGameServer.Services
                 GameOver = false,
             };
             uint turnNumber = 0;
-            string wordToGuess = GetCurrentWord();//todo: add null check
+            string wordToGuess = GetCurrentWord();
             char[] results = new char[5];
             Dictionary<char, bool> unused = new Dictionary<char, bool>();
             List<char> included = new List<char>();
@@ -29,7 +55,7 @@ namespace WordleGameServer.Services
             }
             // Repeatedly wait for a guess from the client stream
             // requestStream.MoveNext() will return false when the client closes the request stream
-            while (!response.Correct && await requestStream.MoveNext() && !context.CancellationToken.IsCancellationRequested && turnNumber < 6)
+            while (wordToGuess != "" && !response.Correct && await requestStream.MoveNext() && !context.CancellationToken.IsCancellationRequested && turnNumber < 6)
             {
                 // Record the outcome of the previous question
                 GuessRequest request = requestStream.Current;
@@ -56,7 +82,11 @@ namespace WordleGameServer.Services
                         response.Unused = GetStringFromDictionary(unused);
                         response.Included = new string(included.ToArray());
                         response.Excluded = new string(excluded.ToArray());
-                        //todo: write to file
+                        //write to file
+                        int[] stats = ParseCSV(wordToGuess + ".csv");
+                        stats[0] = stats[0] + 1; //update player count
+                        stats[turnNumber] = stats[turnNumber] + 1; //update stat at turn number
+                        WriteCSV(wordToGuess + ".csv", stats);
                     }
                     else
                     {
@@ -96,6 +126,12 @@ namespace WordleGameServer.Services
                         response.Unused = GetStringFromDictionary(unused);
                         response.Included = new string(included.ToArray());
                         response.Excluded = new string(excluded.ToArray());
+                        if (response.GameOver)
+                        {
+                            int[] stats = ParseCSV(wordToGuess + ".csv");
+                            stats[0] = stats[0] + 1;//update player count
+                            WriteCSV(wordToGuess + ".csv",stats);
+                        }
                     }
                 }
                 else
@@ -112,6 +148,48 @@ namespace WordleGameServer.Services
                 // Send the response message to the client 
                 await responseStream.WriteAsync(response);
             }
+        }
+        public static void WriteCSV(string file, int[] stats)
+        {
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            string statFile = projectDirectory + "\\Data\\" + file;
+            var csv = new StringBuilder();
+            mut.WaitOne();
+            try
+            {
+                string newLine = "";
+                for (int i = 0; i < stats.Length; i++)
+                {
+                    newLine += stats[i].ToString();
+                }
+                csv.AppendLine(newLine);
+                File.WriteAllText(statFile, csv.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred", ex);
+            }
+            mut.ReleaseMutex();
+        }
+        public static int[] ParseCSV(string file)
+        {
+            int[] result = new int[7];//player count + 6 guess distributions
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+            string statFile = projectDirectory + "\\Data\\" + file;
+            if (!File.Exists(statFile))
+            {
+                return result;
+            }
+            string[] lines = File.ReadAllLines(statFile);
+            string[] thisLine = lines[0].Split(',');
+            for(int i = 0;i < 7; i++)
+            {
+                result[i] = int.Parse(thisLine[i]);
+            }
+
+            return result;
         }
         public string GetStringFromDictionary(Dictionary<char,bool> dict)
         {
@@ -136,7 +214,7 @@ namespace WordleGameServer.Services
                 var channel = GrpcChannel.ForAddress("https://localhost:7163");
                 var server = new DailyWord.DailyWordClient(channel);
 
-                Empty request = new Empty();
+                WordServer.Protos.Empty request = new ();
 
                 WordResponse word = server.GetWord(request);
                 //Console.WriteLine("Word: " + word.ToString());
