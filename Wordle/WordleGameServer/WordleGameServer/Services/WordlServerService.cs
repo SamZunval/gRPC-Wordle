@@ -91,7 +91,7 @@ namespace WordleGameServer.Services
                             }
                         }
                         response.Correct = false;
-                        response.GameOver = (turnNumber == 5) ? true : false;//if last turn then game over
+                        response.GameOver = (turnNumber == 6) ? true : false;//if last turn then game over
                         response.Result = new string(results);
                         response.Unused = GetStringFromDictionary(unused);
                         response.Included = new string(included.ToArray());
@@ -102,7 +102,7 @@ namespace WordleGameServer.Services
                 {
                     //not a valid word or word server is down
                     response.Correct = false;
-                    response.GameOver = (turnNumber == 5) ? true : false;//if last turn then game over
+                    response.GameOver = (turnNumber == 6) ? true : false;//if last turn then game over
                     response.Result = "error";
                     response.Unused = GetStringFromDictionary(unused);
                     response.Included = new string(included.ToArray());
