@@ -1,0 +1,7 @@
+C:\$Winter2026Sem5\INFO-5060 .NET\Wordle-Project\Wordle\WordleGameClient\bin\Debug\WordleGameClient.exe.config
+C:\$Winter2026Sem5\INFO-5060 .NET\Wordle-Project\Wordle\WordleGameClient\bin\Debug\WordleGameClient.exe
+C:\$Winter2026Sem5\INFO-5060 .NET\Wordle-Project\Wordle\WordleGameClient\bin\Debug\WordleGameClient.pdb
+C:\$Winter2026Sem5\INFO-5060 .NET\Wordle-Project\Wordle\WordleGameClient\obj\Debug\WordleGameClient.csproj.AssemblyReference.cache
+C:\$Winter2026Sem5\INFO-5060 .NET\Wordle-Project\Wordle\WordleGameClient\obj\Debug\WordleGameClient.csproj.CoreCompileInputs.cache
+C:\$Winter2026Sem5\INFO-5060 .NET\Wordle-Project\Wordle\WordleGameClient\obj\Debug\WordleGameClient.exe
+C:\$Winter2026Sem5\INFO-5060 .NET\Wordle-Project\Wordle\WordleGameClient\obj\Debug\WordleGameClient.pdb

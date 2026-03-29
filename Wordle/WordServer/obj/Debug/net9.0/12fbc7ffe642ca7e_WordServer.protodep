@@ -1,0 +1,2 @@
+obj\Debug\net9.0\Protos/WordServer.cs \
+obj\Debug\net9.0\Protos/WordServerGrpc.cs: Protos/WordServer.proto
