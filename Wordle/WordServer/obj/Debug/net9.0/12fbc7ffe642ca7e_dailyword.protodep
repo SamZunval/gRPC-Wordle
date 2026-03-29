@@ -1,2 +1,0 @@
-obj\Debug\net9.0\Protos/Dailyword.cs \
-obj\Debug\net9.0\Protos/DailywordGrpc.cs: Protos/dailyword.proto
