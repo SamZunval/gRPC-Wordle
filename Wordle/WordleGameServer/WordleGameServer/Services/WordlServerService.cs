@@ -14,7 +14,7 @@ namespace WordleGameServer.Services
         private static Mutex mut = new Mutex();
         public override Task<StatResponse> GetStats(Protos.Empty request, ServerCallContext context)
         {
-            int[] stats = ParseCSV(GetCurrentWord() + ".csv");
+            int[] stats = ParseCSV("stats.csv");
             int pass = 0;
             for (int i = 1; i < stats.Length; i++)
             {
@@ -84,9 +84,30 @@ namespace WordleGameServer.Services
                         response.Excluded = new string(excluded.ToArray());
                         //write to file
                         int[] stats = ParseCSV(wordToGuess + ".csv");
-                        stats[0] = stats[0] + 1; //update player count
-                        stats[turnNumber] = stats[turnNumber] + 1; //update stat at turn number
-                        WriteCSV(wordToGuess + ".csv", stats);
+
+                        DateTime todaysDate = DateTime.Now.Date;
+                        if (stats[9] == todaysDate.Year && stats[8] == todaysDate.Month && stats[7] == todaysDate.Day)
+                        {
+                            stats[0] = stats[0] + 1; //update player count
+                            stats[turnNumber] = stats[turnNumber] + 1; //update stat at turn number
+                        }
+                        else
+                        {
+                            //new day
+                            stats[0] = 1; //1 player
+                            stats[1] = 0; // 1 attempt
+                            stats[2] = 0; // 2 attempt
+                            stats[3] = 0; // 3 attempt
+                            stats[4] = 0; // 4 attempt
+                            stats[5] = 0; // 5 attempt
+                            stats[6] = 0; // 6 attempt
+                            stats[7] = todaysDate.Day; //day
+                            stats[8] = todaysDate.Month; // month
+                            stats[9] = todaysDate.Year; // year
+
+                            stats[turnNumber] = stats[turnNumber] + 1; //update stat at turn number
+                        }
+                        WriteCSV("stats.csv", stats);
                     }
                     else
                     {
@@ -129,8 +150,28 @@ namespace WordleGameServer.Services
                         if (response.GameOver)
                         {
                             int[] stats = ParseCSV(wordToGuess + ".csv");
-                            stats[0] = stats[0] + 1;//update player count
-                            WriteCSV(wordToGuess + ".csv",stats);
+                            DateTime todaysDate = DateTime.Now.Date;
+                            if (stats[9] == todaysDate.Year && stats[8] == todaysDate.Month && stats[7] == todaysDate.Day)
+                            {
+                                stats[0] = stats[0] + 1;//update player count
+                            }
+                            else
+                            {
+                                //new day
+                                stats[0] = 1; //1 player
+                                stats[1] = 0; // 1 attempt
+                                stats[2] = 0; // 2 attempt
+                                stats[3] = 0; // 3 attempt
+                                stats[4] = 0; // 4 attempt
+                                stats[5] = 0; // 5 attempt
+                                stats[6] = 0; // 6 attempt
+                                stats[7] = todaysDate.Day; //day
+                                stats[8] = todaysDate.Month; // month
+                                stats[9] = todaysDate.Year; // year
+
+                            }
+                            WriteCSV("stats.csv", stats);
+
                         }
                     }
                 }
@@ -174,7 +215,7 @@ namespace WordleGameServer.Services
         }
         public static int[] ParseCSV(string file)
         {
-            int[] result = new int[7];//player count + 6 guess distributions
+            int[] result = new int[10];//player count + 6 guess distributions + 3(day,month,year)
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
             string statFile = projectDirectory + "\\Data\\" + file;
@@ -184,7 +225,7 @@ namespace WordleGameServer.Services
             }
             string[] lines = File.ReadAllLines(statFile);
             string[] thisLine = lines[0].Split(',');
-            for(int i = 0;i < 7; i++)
+            for(int i = 0;i < 10; i++)
             {
                 result[i] = int.Parse(thisLine[i]);
             }
