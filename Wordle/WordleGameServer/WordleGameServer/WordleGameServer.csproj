@@ -8,12 +8,11 @@
 
   <ItemGroup>
     <None Remove="Protos\dailyword.proto" />
-    <None Remove="Protos\WordlServer.proto" />
   </ItemGroup>
 
   <ItemGroup>
     <Protobuf Include="Protos\dailyword.proto" GrpcServices="Client" />
-    <Protobuf Include="Protos\WordlServer.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\WordleServer.proto" GrpcServices="Server" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +23,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

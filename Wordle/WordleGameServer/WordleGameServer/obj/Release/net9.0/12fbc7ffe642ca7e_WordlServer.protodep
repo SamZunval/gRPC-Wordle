@@ -1,0 +1,2 @@
+obj\Release\net9.0\Protos/WordlServer.cs \
+obj\Release\net9.0\Protos/WordlServerGrpc.cs: Protos/WordlServer.proto

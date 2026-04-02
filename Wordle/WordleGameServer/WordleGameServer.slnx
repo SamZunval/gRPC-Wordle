@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="../WordleGameClient/WordleGameClient.csproj" Id="df178e45-a092-4239-9ebd-7361bf4a5c19" />
+  <Project Path="../WordServer/WordServer.csproj" />
   <Project Path="WordleGameServer/WordleGameServer.csproj" />
 </Solution>

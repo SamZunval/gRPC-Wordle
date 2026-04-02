@@ -1,7 +1,0 @@
-C:\Users\conno\Documents\Winter 2026\INFO-5060-components\Project 2\gRPC-Wordle\Wordle\WordleGameClient\bin\Debug\WordleGameClient.exe.config
-C:\Users\conno\Documents\Winter 2026\INFO-5060-components\Project 2\gRPC-Wordle\Wordle\WordleGameClient\bin\Debug\WordleGameClient.exe
-C:\Users\conno\Documents\Winter 2026\INFO-5060-components\Project 2\gRPC-Wordle\Wordle\WordleGameClient\bin\Debug\WordleGameClient.pdb
-C:\Users\conno\Documents\Winter 2026\INFO-5060-components\Project 2\gRPC-Wordle\Wordle\WordleGameClient\obj\Debug\WordleGameClient.csproj.AssemblyReference.cache
-C:\Users\conno\Documents\Winter 2026\INFO-5060-components\Project 2\gRPC-Wordle\Wordle\WordleGameClient\obj\Debug\WordleGameClient.csproj.CoreCompileInputs.cache
-C:\Users\conno\Documents\Winter 2026\INFO-5060-components\Project 2\gRPC-Wordle\Wordle\WordleGameClient\obj\Debug\WordleGameClient.exe
-C:\Users\conno\Documents\Winter 2026\INFO-5060-components\Project 2\gRPC-Wordle\Wordle\WordleGameClient\obj\Debug\WordleGameClient.pdb

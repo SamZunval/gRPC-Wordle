@@ -1,0 +1,2 @@
+obj\Release\net9.0\Protos/Dailyword.cs \
+obj\Release\net9.0\Protos/DailywordGrpc.cs: Protos/dailyword.proto

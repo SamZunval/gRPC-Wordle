@@ -794,23 +794,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\conno\\.nuget\\packages\\": {},
+    "C:\\Users\\samue\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\conno\\Documents\\Winter 2026\\INFO-5060-components\\Project 2\\gRPC-Wordle\\Wordle\\WordServer\\WordServer.csproj",
+      "projectUniqueName": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\Wordle\\WordServer\\WordServer.csproj",
       "projectName": "WordServer",
-      "projectPath": "C:\\Users\\conno\\Documents\\Winter 2026\\INFO-5060-components\\Project 2\\gRPC-Wordle\\Wordle\\WordServer\\WordServer.csproj",
-      "packagesPath": "C:\\Users\\conno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\conno\\Documents\\Winter 2026\\INFO-5060-components\\Project 2\\gRPC-Wordle\\Wordle\\WordServer\\obj\\",
+      "projectPath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\Wordle\\WordServer\\WordServer.csproj",
+      "packagesPath": "C:\\Users\\samue\\.nuget\\packages\\",
+      "outputPath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\Wordle\\WordServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\conno\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\samue\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -818,6 +818,7 @@
         "net9.0"
       ],
       "sources": {
+        "C:\\MyNuGet": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -837,7 +838,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -867,7 +868,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

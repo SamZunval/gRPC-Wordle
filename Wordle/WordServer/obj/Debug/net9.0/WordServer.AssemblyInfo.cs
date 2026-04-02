@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WordServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3376b311bee66aab28c52611ba8fd396aa7fecd0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f39b4e79094746f810de86a4a42921d85543614")]
 [assembly: System.Reflection.AssemblyProductAttribute("WordServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WordServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

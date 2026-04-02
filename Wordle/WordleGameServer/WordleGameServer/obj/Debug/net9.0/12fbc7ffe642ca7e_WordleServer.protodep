@@ -1,0 +1,2 @@
+obj\Debug\net9.0\Protos/WordleServer.cs \
+obj\Debug\net9.0\Protos/WordleServerGrpc.cs: Protos/WordleServer.proto
