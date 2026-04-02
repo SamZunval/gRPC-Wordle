@@ -1,3 +1,5 @@
 PLEASE READ
-I F***** IT UP SO PLEASE REBUILD THE SOLUTION WHEN YOU DOWNLOAD THE FILES AND IT SHOULD WORK
+I think the only errors need to fix are:
+1. The localhost is cannot be used to run mutiple instances (im unsure if I even need to run multiple ones)
+2. I dont think the stats.csv properly updates it just keeps writing of the file again
 
