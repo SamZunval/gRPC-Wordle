@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wPwgUxFFEOU=",
+  "dgSpecHash": "ky+x5WXeY1s=",
   "success": true,
-  "projectFilePath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\Wordle\\WordleGameClient\\WordleGameClient.csproj",
+  "projectFilePath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameClient\\WordleGameClient.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\samue\\.nuget\\packages\\google.protobuf\\3.34.1\\google.protobuf.3.34.1.nupkg.sha512",
     "C:\\Users\\samue\\.nuget\\packages\\grpc\\2.46.6\\grpc.2.46.6.nupkg.sha512",

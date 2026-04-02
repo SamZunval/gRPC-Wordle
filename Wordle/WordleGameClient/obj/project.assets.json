@@ -494,11 +494,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\Wordle\\WordleGameClient\\WordleGameClient.csproj",
+      "projectUniqueName": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameClient\\WordleGameClient.csproj",
       "projectName": "WordleGameClient",
-      "projectPath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\Wordle\\WordleGameClient\\WordleGameClient.csproj",
+      "projectPath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameClient\\WordleGameClient.csproj",
       "packagesPath": "C:\\Users\\samue\\.nuget\\packages\\",
-      "outputPath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\Wordle\\WordleGameClient\\obj\\",
+      "outputPath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameClient\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

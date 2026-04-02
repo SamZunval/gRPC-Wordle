@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordleGameClient", "WordleGameClient\WordleGameClient.csproj", "{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordleGameServer", "WordleGameServer\WordleGameServer.csproj", "{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordServer", "WordServer\WordServer.csproj", "{8CDBDE8A-491B-A764-2D38-242C3EBAFB92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		stats.csv = stats.csv
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CDBDE8A-491B-A764-2D38-242C3EBAFB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CDBDE8A-491B-A764-2D38-242C3EBAFB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CDBDE8A-491B-A764-2D38-242C3EBAFB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CDBDE8A-491B-A764-2D38-242C3EBAFB92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68D2356A-1E8C-4EAE-A8D3-8E3055CA575B}
+	EndGlobalSection
+EndGlobal

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cl42tM0nFqk=",
+  "dgSpecHash": "9Wb6Twr1ntA=",
   "success": true,
-  "projectFilePath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\Wordle\\WordServer\\WordServer.csproj",
+  "projectFilePath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordServer\\WordServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\samue\\.nuget\\packages\\google.protobuf\\3.27.0\\google.protobuf.3.27.0.nupkg.sha512",
     "C:\\Users\\samue\\.nuget\\packages\\grpc.aspnetcore\\2.64.0\\grpc.aspnetcore.2.64.0.nupkg.sha512",

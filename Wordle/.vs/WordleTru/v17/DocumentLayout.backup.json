@@ -1,0 +1,153 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}|NewFolder1{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}|C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\stats.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}|NewFolder1{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}|solutionrelative:stats.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}|WordleGameClient\\WordleGameClient.csproj|c:\\$winter2026sem5\\info-5060 .net\\wordle-project\\wordletru\\wordlegameclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}|WordleGameClient\\WordleGameClient.csproj|solutionrelative:wordlegameclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}|WordleGameClient\\WordleGameClient.csproj|c:\\$winter2026sem5\\info-5060 .net\\wordle-project\\wordletru\\wordlegameclient\\protos\\wordleserver.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{F212B792-FE5D-4EC4-85CC-A96C6D93BB50}|WordleGameClient\\WordleGameClient.csproj|solutionrelative:wordlegameclient\\protos\\wordleserver.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}|WordleGameServer\\WordleGameServer.csproj|c:\\$winter2026sem5\\info-5060 .net\\wordle-project\\wordletru\\wordlegameserver\\protos\\wordleserver.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}|WordleGameServer\\WordleGameServer.csproj|solutionrelative:wordlegameserver\\protos\\wordleserver.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}|WordleGameServer\\WordleGameServer.csproj|c:\\$winter2026sem5\\info-5060 .net\\wordle-project\\wordletru\\wordlegameserver\\protos\\dailyword.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}|WordleGameServer\\WordleGameServer.csproj|solutionrelative:wordlegameserver\\protos\\dailyword.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}|WordleGameServer\\WordleGameServer.csproj|c:\\$winter2026sem5\\info-5060 .net\\wordle-project\\wordletru\\wordlegameserver\\data\\stats.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}|WordleGameServer\\WordleGameServer.csproj|solutionrelative:wordlegameserver\\data\\stats.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}|WordleGameServer\\WordleGameServer.csproj|c:\\$winter2026sem5\\info-5060 .net\\wordle-project\\wordletru\\wordlegameserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FF0B6C48-2D56-F918-C3E2-E73DE31742C9}|WordleGameServer\\WordleGameServer.csproj|solutionrelative:wordlegameserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "stats.csv",
+              "DocumentMoniker": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\stats.csv",
+              "RelativeDocumentMoniker": "stats.csv",
+              "ToolTip": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\stats.csv",
+              "RelativeToolTip": "stats.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2026-04-02T01:49:44.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WordleServer.proto",
+              "DocumentMoniker": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameServer\\Protos\\WordleServer.proto",
+              "RelativeDocumentMoniker": "WordleGameServer\\Protos\\WordleServer.proto",
+              "ToolTip": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameServer\\Protos\\WordleServer.proto",
+              "RelativeToolTip": "WordleGameServer\\Protos\\WordleServer.proto",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2026-04-02T01:46:51.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "stats.csv",
+              "DocumentMoniker": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameServer\\Data\\stats.csv",
+              "RelativeDocumentMoniker": "WordleGameServer\\Data\\stats.csv",
+              "ToolTip": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameServer\\Data\\stats.csv",
+              "RelativeToolTip": "WordleGameServer\\Data\\stats.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2026-04-02T01:46:49.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameServer\\Program.cs",
+              "RelativeDocumentMoniker": "WordleGameServer\\Program.cs",
+              "ToolTip": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameServer\\Program.cs",
+              "RelativeToolTip": "WordleGameServer\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T01:46:47.59Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameClient\\Program.cs",
+              "RelativeDocumentMoniker": "WordleGameClient\\Program.cs",
+              "ToolTip": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameClient\\Program.cs",
+              "RelativeToolTip": "WordleGameClient\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T01:44:47.198Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "dailyword.proto",
+              "DocumentMoniker": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameServer\\Protos\\dailyword.proto",
+              "RelativeDocumentMoniker": "WordleGameServer\\Protos\\dailyword.proto",
+              "ToolTip": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameServer\\Protos\\dailyword.proto",
+              "RelativeToolTip": "WordleGameServer\\Protos\\dailyword.proto",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2026-04-02T01:46:51.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "WordleServer.proto",
+              "DocumentMoniker": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameClient\\Protos\\WordleServer.proto",
+              "RelativeDocumentMoniker": "WordleGameClient\\Protos\\WordleServer.proto",
+              "ToolTip": "C:\\$Winter2026Sem5\\INFO-5060 .NET\\Wordle-Project\\WordleTru\\WordleGameClient\\Protos\\WordleServer.proto",
+              "RelativeToolTip": "WordleGameClient\\Protos\\WordleServer.proto",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2026-04-02T01:46:10.701Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 74,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
