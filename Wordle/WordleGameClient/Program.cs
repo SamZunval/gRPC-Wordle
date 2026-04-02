@@ -14,77 +14,92 @@ namespace WordleGameClient
             var client = new WordleServer.WordleServerClient(channel);
 
             Console.WriteLine(" Welcome to Wordle!");
-
-            //Start the streaming call
-            using (var call = client.Play())
+            try
             {
-                bool gameOver = false;
-
-                while (!gameOver)
+                //Start the streaming call
+                using (var call = client.Play())
                 {
-                    //Get input
-                    Console.Write("\nEnter a 5-letter word: ");
-                    var guess = Console.ReadLine()?.ToLower();
+                    bool gameOver = false;
 
-                    //Validate imput
-                    if (string.IsNullOrWhiteSpace(guess) || guess.Length != 5)
+                    while (!gameOver)
                     {
-                        Console.WriteLine("Invalid input. Must be 5 letters.");
-                        continue;
-                    }
+                        //Get input
+                        Console.Write("\nEnter a 5-letter word: ");
+                        var guess = Console.ReadLine()?.ToLower();
 
-                    //Send guess
-                    await call.RequestStream.WriteAsync(new GuessRequest
-                    {
-                        Word = guess
-                    });
-
-                    //Wait for the server to respond
-                    if (await call.ResponseStream.MoveNext())
-                    {
-                        var response = call.ResponseStream.Current;
-
-                        //Checks if error
-                        if (response.Result.Contains("error"))
+                        //Validate imput
+                        if (string.IsNullOrWhiteSpace(guess) || guess.Length != 5)
                         {
-                            Console.WriteLine("The word is invalid, please try again");
+                            Console.WriteLine("Invalid input. Must be 5 letters.");
                             continue;
                         }
 
-                        Console.WriteLine($"\nResult: {response.Result}");
-                        Console.WriteLine($"Included: {response.Included}");
-                        Console.WriteLine($"Excluded: {response.Excluded}");
-                        Console.WriteLine($"Unused: {response.Unused}");
+                        //Send guess
+                        await call.RequestStream.WriteAsync(new GuessRequest
+                        {
+                            Word = guess
+                        });
 
-                        if (response.Correct)
+                        //Wait for the server to respond
+                        if (await call.ResponseStream.MoveNext())
                         {
-                            Console.WriteLine("Correct word!");
-                            gameOver = true;
-                        }
-                        else if (response.GameOver)
-                        {
-                            Console.WriteLine("Game Over!");
-                            gameOver = true;
+                            var response = call.ResponseStream.Current;
+
+                            //Checks if error(invalid word)
+                            if (response.Result.Contains("error"))
+                            {
+                                Console.WriteLine("The word is invalid, please try again");
+                                continue;
+                            }
+                            //Checks if rpc error(word server down)
+                            if (response.Result.Contains("rpc"))
+                            {
+                                Console.WriteLine("Error: The word server is not running");
+                                Console.WriteLine("\nPress any key to exit...");
+                                Console.ReadKey();
+                                return;
+                            }
+                            //print information about the guess
+                            Console.WriteLine($"\nResult: {response.Result}");
+                            Console.WriteLine($"Included: {response.Included}");
+                            Console.WriteLine($"Excluded: {response.Excluded}");
+                            Console.WriteLine($"Unused: {response.Unused}");
+
+                            if (response.Correct)
+                            {
+                                Console.WriteLine("Correct word!");
+                                gameOver = true;
+                            }
+                            else if (response.GameOver)
+                            {
+                                Console.WriteLine("Game Over!");
+                                gameOver = true;
+                            }
                         }
                     }
+
+                    await call.RequestStream.CompleteAsync();//close the game
+
+                    var stats = client.GetStats(new Empty());//get stats from rpc
+                    //display statistics to the client
+                    Console.WriteLine("\n--- GAME STATS ---");
+                    Console.WriteLine($"Players: {stats.Players}");
+                    Console.WriteLine($"Win Rate: {stats.Winners:P}");
+
+                    Console.WriteLine("\nGuess Distribution:");
+                    Console.WriteLine($"1 guess: {stats.One}");
+                    Console.WriteLine($"2 guesses: {stats.Two}");
+                    Console.WriteLine($"3 guesses: {stats.Three}");
+                    Console.WriteLine($"4 guesses: {stats.Four}");
+                    Console.WriteLine($"5 guesses: {stats.Five}");
+                    Console.WriteLine($"6 guesses: {stats.Six}");
+
+                    Console.WriteLine("\nPress any key to exit...");
+                    Console.ReadKey();
                 }
-
-                await call.RequestStream.CompleteAsync();
-
-                var stats =  client.GetStats(new Empty());
-
-                Console.WriteLine("\n--- GAME STATS ---");
-                Console.WriteLine($"Players: {stats.Players}");
-                Console.WriteLine($"Win Rate: {stats.Winners:P}");
-
-                Console.WriteLine("\nGuess Distribution:");
-                Console.WriteLine($"1 guess: {stats.One}");
-                Console.WriteLine($"2 guesses: {stats.Two}");
-                Console.WriteLine($"3 guesses: {stats.Three}");
-                Console.WriteLine($"4 guesses: {stats.Four}");
-                Console.WriteLine($"5 guesses: {stats.Five}");
-                Console.WriteLine($"6 guesses: {stats.Six}");
-
+            }
+            catch (RpcException ex) {
+                Console.WriteLine("Error, the game server is not running");
                 Console.WriteLine("\nPress any key to exit...");
                 Console.ReadKey();
             }

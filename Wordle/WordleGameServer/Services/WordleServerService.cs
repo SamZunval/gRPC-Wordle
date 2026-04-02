@@ -182,15 +182,29 @@ namespace WordleGameServer.Services
                 }
                 else
                 {
-                    //not a valid word or word server is down
+                    //not a valid word
                     response.Correct = false;
                     response.GameOver = (turnNumber == 6) ? true : false;//if last turn then game over
-                    response.Result = "error";//send error instead of normal result to inform client that something went wrong
+                    response.Result = "error";//send error instead of normal result to inform client that the word is not valid
                     response.Unused = GetStringFromDictionary(unused);//re send the data from last attempt
                     response.Included = new string(included.ToArray());//re send the data from last attempt
                     response.Excluded = new string(excluded.ToArray());//re send the data from last attempt
                 }
                 
+                // Send the response message to the client 
+                await responseStream.WriteAsync(response);
+            }
+            if(wordToGuess == "")
+            {
+                //word server is down
+                response.Result = "rpc";// send rpc if the wordToGuess is empty(word server down)
+                //empty data
+                response.Correct = false;
+                response.GameOver = (turnNumber == 6) ? true : false;//if last turn then game over
+                response.Unused = GetStringFromDictionary(unused);//re send the data from last attempt
+                response.Included = new string(included.ToArray());//re send the data from last attempt
+                response.Excluded = new string(excluded.ToArray());//re send the data from last attempt
+
                 // Send the response message to the client 
                 await responseStream.WriteAsync(response);
             }
