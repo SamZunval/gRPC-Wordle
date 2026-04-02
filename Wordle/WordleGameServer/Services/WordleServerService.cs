@@ -11,12 +11,13 @@ namespace WordleGameServer.Services
 {
     public class WordleServerService : WordleServer.WordleServerBase
     {
-        private static Mutex mut = new Mutex();
+        private static Mutex mut = new Mutex();//to prevent two instences from accessing the file at the same time
         public override Task<StatResponse> GetStats(Protos.Empty request, ServerCallContext context)
         {
             int[] stats = ParseCSV("stats.csv");
             int pass = 0;
-            for (int i = 1; i < stats.Length; i++)
+            //add all guesses from the guess ranges
+            for (int i = 1; i < 7; i++)
             {
                 pass += stats[i];
             }
@@ -59,14 +60,13 @@ namespace WordleGameServer.Services
             // requestStream.MoveNext() will return false when the client closes the request stream
             while (wordToGuess != "" && !response.Correct && await requestStream.MoveNext() && !context.CancellationToken.IsCancellationRequested && turnNumber < 6)
             {
-                // Record the outcome of the previous question
                 GuessRequest request = requestStream.Current;
-                if (isValidWord(request.Word))
+                if (IsValidWord(request.Word))//check that the word is valid
                 {
                     turnNumber++;
                     for (int i = 0; i < 5; i++)
                     {
-                        unused[request.Word[i]] = false;
+                        unused[request.Word[i]] = false;//update unused dictionary
                     }
                     if (request.Word.Equals(wordToGuess))
                     {
@@ -85,9 +85,10 @@ namespace WordleGameServer.Services
                         response.Included = new string(included.ToArray());
                         response.Excluded = new string(excluded.ToArray());
                         //write to file
-                        int[] stats = ParseCSV(wordToGuess + ".csv");
+                        int[] stats = ParseCSV("stats.csv");
 
                         DateTime todaysDate = DateTime.Now.Date;
+                        //check if the file date is the current date
                         if (stats[9] == todaysDate.Year && stats[8] == todaysDate.Month && stats[7] == todaysDate.Day)
                         {
                             stats[0] = stats[0] + 1; //update player count
@@ -115,32 +116,29 @@ namespace WordleGameServer.Services
                     {
                         for (int i = 0; i < 5; i++)
                         {
-                            if (request.Word[i] == wordToGuess[i])//right
+                            if (request.Word[i] == wordToGuess[i])//right letter and location
                             {
                                 results[i] = '*';
                                 if (!included.Contains(request.Word[i]))
                                 {
-                                    included.Add(request.Word[i]);
+                                    included.Add(request.Word[i]);//add to included list
                                 }
-                                unused[request.Word[i]] = false;
                             }
-                            else if (wordToGuess.Contains(request.Word[i]))//wrong location
+                            else if (wordToGuess.Contains(request.Word[i]))//right letter wrong location
                             {
                                 results[i] = '?';
                                 if (!included.Contains(request.Word[i]))
                                 {
-                                    included.Add(request.Word[i]);
+                                    included.Add(request.Word[i]);//add to included list
                                 }
-                                unused[request.Word[i]] = false;
                             }
                             else//wrong
                             {
                                 results[i] = 'x';
                                 if (!excluded.Contains(request.Word[i]))
                                 {
-                                    excluded.Add(request.Word[i]);
+                                    excluded.Add(request.Word[i]);//add to excluded list
                                 }
-                                unused[request.Word[i]] = false;
                             }
                         }
                         response.Correct = false;
@@ -149,10 +147,12 @@ namespace WordleGameServer.Services
                         response.Unused = GetStringFromDictionary(unused);
                         response.Included = new string(included.ToArray());
                         response.Excluded = new string(excluded.ToArray());
+                        //game over update file
                         if (response.GameOver)
                         {
-                            int[] stats = ParseCSV(wordToGuess + ".csv");
+                            int[] stats = ParseCSV("stats.csv");
                             DateTime todaysDate = DateTime.Now.Date;
+                            //check if the file is for the right date
                             if (stats[9] == todaysDate.Year && stats[8] == todaysDate.Month && stats[7] == todaysDate.Day)
                             {
                                 stats[0] = stats[0] + 1;//update player count
@@ -198,7 +198,7 @@ namespace WordleGameServer.Services
             string projectDirectory = Directory.GetParent(workingDirectory).FullName;
             string statFile = projectDirectory + "\\Data\\" + file;
             var csv = new StringBuilder();
-            mut.WaitOne();
+            mut.WaitOne();//lock file
             try
             {
                 string newLine = "";
@@ -213,8 +213,9 @@ namespace WordleGameServer.Services
             {
                 throw new Exception("An error occurred", ex);
             }
-            mut.ReleaseMutex();
+            mut.ReleaseMutex();//release file
         }
+        //gets data from the csv file
         public static int[] ParseCSV(string file)
         {
             int[] result = new int[10];//player count + 6 guess distributions + 3(day,month,year)
@@ -225,7 +226,9 @@ namespace WordleGameServer.Services
             {
                 return result;
             }
+            mut.WaitOne();//lock file
             string[] lines = File.ReadAllLines(statFile);
+            mut.ReleaseMutex();//release file
             string[] thisLine = lines[0].Split(',');
             for(int i = 0;i < 10; i++)
             {
@@ -234,6 +237,7 @@ namespace WordleGameServer.Services
 
             return result;
         }
+        //returns all unused letters from the dictionary
         public string GetStringFromDictionary(Dictionary<char,bool> dict)
         {
             string result = string.Empty;
@@ -246,6 +250,7 @@ namespace WordleGameServer.Services
             }
             return result;
         }
+        //gets the word of the day from the word server
         public string GetCurrentWord()
         {
             string result = "";
@@ -270,7 +275,8 @@ namespace WordleGameServer.Services
             }
             return result;
         }
-        public bool isValidWord(string guess)
+        //asks the word server if a word is valid
+        public bool IsValidWord(string guess)
         {
             try
             {
