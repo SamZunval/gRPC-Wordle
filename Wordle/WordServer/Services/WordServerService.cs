@@ -3,7 +3,11 @@ using System;
 using System.Text.Json;
 using WordServer.Protos;
 using WordServer.Services;
-
+/*
+ INFO-5060: Wordle Game
+ Connor Tidy and Samuel Zuniga Valencia
+ WordServerService contains rpcs to get the word of the day and validate words
+ */
 namespace WordServer.Services
 {
     public class WordServerService: DailyWord.DailyWordBase
@@ -38,21 +42,21 @@ namespace WordServer.Services
                 Console.WriteLine(e);
             }
         }
-
+        //sends the word of the day through an rpc
         public override Task<WordResponse> GetWord(Empty request, ServerCallContext context)
         {
             WordResponse response = new WordResponse();
-            response.Word = todaysWord;
+            response.Word = todaysWord;//send the word of the day as a response
 
             return Task.FromResult(response);
         }
-
+        //validates that a word is in the word list
         public override Task<ValidateResponse> ValidateWord(WordRequest request, ServerCallContext context)
         {
             ValidateResponse response = new ValidateResponse();
-            bool exists = words.Contains(request.Word.ToLower());
+            bool exists = words.Contains(request.Word.ToLower());//check for the word in the list and make it case insensitive
 
-            response.IsValid = exists;
+            response.IsValid = exists;//update response
             return Task.FromResult(response);
 
         }

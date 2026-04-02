@@ -3,6 +3,11 @@ using Grpc.Net.Client;
 using WordleGameServer.Protos;
 using WordleGameServer.Services;
 using WordServer.Protos;
+/*
+ INFO-5060: Wordle Game
+ Connor Tidy and Samuel Zuniga Valencia
+ A basic Program file to set up the grpc
+ */
 namespace WordleGameServer
 {
     public class Program

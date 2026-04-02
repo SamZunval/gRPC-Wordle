@@ -3,7 +3,11 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
 using WordleGameServer.Protos;
-
+/*
+ INFO-5060: Wordle Game
+ Connor Tidy and Samuel Zuniga Valencia
+ The client program handles user inputs, calls the game server and displays results
+ */
 namespace WordleGameClient
 {
     class Program

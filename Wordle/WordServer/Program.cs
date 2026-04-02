@@ -1,5 +1,9 @@
 using WordServer.Services;
-
+/*
+ INFO-5060: Wordle Game
+ Connor Tidy and Samuel Zuniga Valencia
+ A basic Program file to set up the grpc
+ */
 namespace WordServer
 {
     public class Program

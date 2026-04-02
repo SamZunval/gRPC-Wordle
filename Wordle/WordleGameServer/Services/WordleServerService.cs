@@ -6,7 +6,11 @@ using System.Runtime;
 using System.Text;
 using WordleGameServer.Protos;
 using WordServer.Protos;
-
+/*
+ INFO-5060: Wordle Game
+ Connor Tidy and Samuel Zuniga Valencia
+ WordleServerService contains rpcs to play and validate words, helper functions to read and write to a csv and some more general helper methods
+ */
 namespace WordleGameServer.Services
 {
     public class WordleServerService : WordleServer.WordleServerBase
