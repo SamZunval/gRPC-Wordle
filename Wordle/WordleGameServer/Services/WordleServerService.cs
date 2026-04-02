@@ -14,9 +14,10 @@ namespace WordleGameServer.Services
         private static Mutex mut = new Mutex();//to prevent two instences from accessing the file at the same time
         public override Task<StatResponse> GetStats(Protos.Empty request, ServerCallContext context)
         {
+            //get stats from the file
             int[] stats = ParseCSV("stats.csv");
             int pass = 0;
-            //add all guesses from the guess ranges
+            //add all guesses from the attempts ranges
             for (int i = 1; i < 7; i++)
             {
                 pass += stats[i];
@@ -27,8 +28,8 @@ namespace WordleGameServer.Services
             {
                 Players = (uint)stats[0],
                 Winners = (float)pass / divisor,//correct players divided by all players
-                One = (uint)stats[1],
-                Two = (uint)stats[2],
+                One = (uint)stats[1],//first try
+                Two = (uint)stats[2],//second try
                 Three = (uint)stats[3],
                 Four = (uint)stats[4],
                 Five = (uint)stats[5],
@@ -47,11 +48,11 @@ namespace WordleGameServer.Services
             };
 
             uint turnNumber = 0;
-            string wordToGuess = GetCurrentWord();
-            char[] results = new char[5];
-            Dictionary<char, bool> unused = new Dictionary<char, bool>();
-            List<char> included = new List<char>();
-            List<char> excluded = new List<char>();
+            string wordToGuess = GetCurrentWord();//get word from server
+            char[] results = new char[5];//holds results like x?***
+            Dictionary<char, bool> unused = new Dictionary<char, bool>();//stores all unused letters
+            List<char> included = new List<char>();//stores letters that are in the word
+            List<char> excluded = new List<char>();//stores letter that are not in the word
             for (int i = 0; i < 26; i++)
             {
                 unused.Add((char)('a' + i), true);//add all letter lazily
@@ -63,12 +64,12 @@ namespace WordleGameServer.Services
                 GuessRequest request = requestStream.Current;
                 if (IsValidWord(request.Word))//check that the word is valid
                 {
-                    turnNumber++;
+                    turnNumber++;//new attempt/turn
                     for (int i = 0; i < 5; i++)
                     {
                         unused[request.Word[i]] = false;//update unused dictionary
                     }
-                    if (request.Word.Equals(wordToGuess))
+                    if (request.Word.Equals(wordToGuess))//exact match(winner)
                     {
                         //add word to list of included chars
                         for (int i = 0; i < 5; i++)
@@ -79,11 +80,11 @@ namespace WordleGameServer.Services
                             }
                         }
                         response.Correct = true;
-                        response.GameOver = false;
+                        response.GameOver = false;//gameover is for ran out of turns
                         response.Result = "*****";
-                        response.Unused = GetStringFromDictionary(unused);
-                        response.Included = new string(included.ToArray());
-                        response.Excluded = new string(excluded.ToArray());
+                        response.Unused = GetStringFromDictionary(unused);//get unused letters from dictionary(useless in this case because user has won)
+                        response.Included = new string(included.ToArray());//get included letters from list(useless in this case because user has won)
+                        response.Excluded = new string(excluded.ToArray());//get Excluded letters from list(useless in this case because user has won)
                         //write to file
                         int[] stats = ParseCSV("stats.csv");
 
@@ -110,7 +111,7 @@ namespace WordleGameServer.Services
 
                             stats[turnNumber] = stats[turnNumber] + 1; //update stat at turn number
                         }
-                        WriteCSV("stats.csv", stats);
+                        WriteCSV("stats.csv", stats);//write to file
                     }
                     else
                     {
@@ -118,7 +119,7 @@ namespace WordleGameServer.Services
                         {
                             if (request.Word[i] == wordToGuess[i])//right letter and location
                             {
-                                results[i] = '*';
+                                results[i] = '*';//add a star at the location
                                 if (!included.Contains(request.Word[i]))
                                 {
                                     included.Add(request.Word[i]);//add to included list
@@ -126,7 +127,7 @@ namespace WordleGameServer.Services
                             }
                             else if (wordToGuess.Contains(request.Word[i]))//right letter wrong location
                             {
-                                results[i] = '?';
+                                results[i] = '?';//add a ? at the location
                                 if (!included.Contains(request.Word[i]))
                                 {
                                     included.Add(request.Word[i]);//add to included list
@@ -134,30 +135,32 @@ namespace WordleGameServer.Services
                             }
                             else//wrong
                             {
-                                results[i] = 'x';
+                                results[i] = 'x';//add a x at the location
                                 if (!excluded.Contains(request.Word[i]))
                                 {
                                     excluded.Add(request.Word[i]);//add to excluded list
                                 }
                             }
                         }
-                        response.Correct = false;
+                        response.Correct = false;//not the correct word
                         response.GameOver = (turnNumber == 6) ? true : false;//if last turn then game over
-                        response.Result = new string(results);
-                        response.Unused = GetStringFromDictionary(unused);
-                        response.Included = new string(included.ToArray());
-                        response.Excluded = new string(excluded.ToArray());
+                        response.Result = new string(results);//the resuult string to display to users
+                        response.Unused = GetStringFromDictionary(unused);//get the unused letters from the dictionary
+                        response.Included = new string(included.ToArray());//get included letters from list
+                        response.Excluded = new string(excluded.ToArray());//get Excluded letters from list
+
                         //game over update file
                         if (response.GameOver)
                         {
+                            //get daily stats from file
                             int[] stats = ParseCSV("stats.csv");
                             DateTime todaysDate = DateTime.Now.Date;
                             //check if the file is for the right date
                             if (stats[9] == todaysDate.Year && stats[8] == todaysDate.Month && stats[7] == todaysDate.Day)
                             {
-                                stats[0] = stats[0] + 1;//update player count
+                                stats[0] = stats[0] + 1;//did not win so only update player count
                             }
-                            else
+                            else //wrong date, overwrite file
                             {
                                 //new day
                                 stats[0] = 1; //1 player
@@ -172,7 +175,7 @@ namespace WordleGameServer.Services
                                 stats[9] = todaysDate.Year; // year
 
                             }
-                            WriteCSV("stats.csv", stats);
+                            WriteCSV("stats.csv", stats);//write to file
 
                         }
                     }
@@ -182,10 +185,10 @@ namespace WordleGameServer.Services
                     //not a valid word or word server is down
                     response.Correct = false;
                     response.GameOver = (turnNumber == 6) ? true : false;//if last turn then game over
-                    response.Result = "error";
-                    response.Unused = GetStringFromDictionary(unused);
-                    response.Included = new string(included.ToArray());
-                    response.Excluded = new string(excluded.ToArray());
+                    response.Result = "error";//send error instead of normal result to inform client that something went wrong
+                    response.Unused = GetStringFromDictionary(unused);//re send the data from last attempt
+                    response.Included = new string(included.ToArray());//re send the data from last attempt
+                    response.Excluded = new string(excluded.ToArray());//re send the data from last attempt
                 }
                 
                 // Send the response message to the client 
@@ -202,12 +205,13 @@ namespace WordleGameServer.Services
             try
             {
                 string newLine = "";
+                //stats: [0] : count, [1 -6]: attempts/guesses, [7-9]: date
                 for (int i = 0; i < stats.Length; i++)
                 {
-                    newLine += stats[i].ToString()+",";
+                    newLine += stats[i].ToString()+",";//add each stat value to the string seperated by commas
                 }
-                csv.AppendLine(newLine);
-                File.WriteAllText(statFile, csv.ToString());
+                csv.AppendLine(newLine);//write line to string builder
+                File.WriteAllText(statFile, csv.ToString());//overwrite file with new data
             }
             catch (Exception ex)
             {
@@ -227,12 +231,13 @@ namespace WordleGameServer.Services
                 return result;
             }
             mut.WaitOne();//lock file
-            string[] lines = File.ReadAllLines(statFile);
+            string[] lines = File.ReadAllLines(statFile);//read file to string array
             mut.ReleaseMutex();//release file
-            string[] thisLine = lines[0].Split(',');
-            for(int i = 0;i < 10; i++)
+            string[] thisLine = lines[0].Split(',');//only the first line of the file is used, split the line on every comma (csv file)
+            //thisLine: [0] : count, [1 -6]: attempts/guesses, [7-9]: date
+            for (int i = 0;i < 10; i++)
             {
-                result[i] = int.Parse(thisLine[i]);
+                result[i] = int.Parse(thisLine[i]);//convert string results into an int array
             }
 
             return result;
@@ -243,9 +248,9 @@ namespace WordleGameServer.Services
             string result = string.Empty;
             foreach(var letter in dict)
             {
-                if (letter.Value)
+                if (letter.Value)//check for the value to be true(meaning the letter is not used)
                 {
-                    result += letter.Key;
+                    result += letter.Key;//add the letter to the string
                 }
             }
             return result;
@@ -257,17 +262,14 @@ namespace WordleGameServer.Services
             try
             {
                 // Connect to the service
-                // Note that the port number 7047 has to match the port number selected for https
-                // by the service project's launchSettings module (found in the Properties folder).
                 var channel = GrpcChannel.ForAddress("https://localhost:7163");
                 var server = new DailyWord.DailyWordClient(channel);
 
-                WordServer.Protos.Empty request = new ();
+                WordServer.Protos.Empty request = new ();//empty request
 
-                WordResponse word = server.GetWord(request);
-                //Console.WriteLine("Word: " + word.ToString());
+                WordResponse word = server.GetWord(request);//call rpc
 
-                result = new string(word.Word);
+                result = new string(word.Word);//return the word of the day
             }
             catch (RpcException)
             {
@@ -281,20 +283,18 @@ namespace WordleGameServer.Services
             try
             {
                 // Connect to the service
-                // Note that the port number 7047 has to match the port number selected for https
-                // by the service project's launchSettings module (found in the Properties folder).
                 var channel = GrpcChannel.ForAddress("https://localhost:7163");
                 var server = new DailyWord.DailyWordClient(channel);
 
+                //send the guess to the server to check
                 WordRequest request = new WordRequest()
                 {
                     Word = guess
                 };
 
-                ValidateResponse valid = server.ValidateWord(request);
-                //Console.WriteLine("Word: " + word.ToString());
+                ValidateResponse valid = server.ValidateWord(request);//recieve server response
 
-                return valid.IsValid;
+                return valid.IsValid;//return whether the server thinks the word is valid
             }
             catch (RpcException)
             {
